@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История технических осмотров</title>
+    <link rel="stylesheet" href="RGR.css">
+    <script>
+        function checkMaintenanceHistory() {
+            var inputDate = new Date(document.getElementById("currentDate").value);
+            var resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "";
+
+            if (isNaN(inputDate.getTime())) {
+                resultsDiv.innerHTML = "<p>Пожалуйста, введите корректную дату.</p>";
+                return;
+            }
+
+            var vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            var maintenanceHistory = [];
+
+            vehicles.forEach(function(vehicle) {
+                var manufactureDate = new Date(vehicle.manufactureDate);
+                var nextMaintenanceDate = new Date(manufactureDate);
+                nextMaintenanceDate.setFullYear(manufactureDate.getFullYear() + 1);
+
+                while (nextMaintenanceDate < inputDate) {
+                    maintenanceHistory.push({
+                        type: vehicle.type,
+                        maintenanceDate: nextMaintenanceDate.toISOString().split('T')[0]
+                    });
+                    nextMaintenanceDate.setFullYear(nextMaintenanceDate.getFullYear() + 1);
+                }
+            });
+
+            if (maintenanceHistory.length > 0) {
+                maintenanceHistory.forEach(function(history) {
+                    var historyDiv = document.createElement("div");
+                    historyDiv.className = "history";
+
+                    historyDiv.innerHTML = `
+                        <p><strong>Название корабля:</strong> ${history.type}</p>
+                        <p><strong>Дата последнего ТО:</strong> ${history.maintenanceDate}</p>
+                    `;
+
+                    resultsDiv.appendChild(historyDiv);
+                });
+            } else {
+                resultsDiv.innerHTML = "<p>Нет записей о прошедших технических осмотрах.</p>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>История технических осмотров</h1>
+    </header>
+
+    <main>
+        <div class="maintenance-form">
+            <h2>Проверка истории ТО</h2>
+            <label for="currentDate">Введите текущую дату:</label>
+            <input type="date" id="currentDate" required>
+            <button type="button" onclick="checkMaintenanceHistory()">Проверить</button>
+        </div>
+
+        <div id="results" class="results">
+            <!-- История ТО будет отображаться здесь -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Система учета состояния водных транспортных средств</p>
+    </footer>
+</body>
+</html>

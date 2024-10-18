@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиск транспортных средств</title>
+    <link rel="stylesheet" href="RGR.css">
+    <script>
+        function addFilter() {
+            var filterDiv = document.createElement('div');
+            filterDiv.className = 'filter-group';
+            
+            filterDiv.innerHTML = `
+                <select class="filterType" name="filterType">
+                    <option value="type">Тип</option>
+                    <option value="brand">Марка</option>
+                    <option value="manufacturer">Производитель</option>
+                    <option value="color">Цвет</option>
+                    <option value="serialNumber">Заводской номер</option>
+                    <option value="registrationNumber">Бортовой номер</option>
+                    <option value="manufactureDate">Дата выпуска</option>
+                    <option value="constructionFeatures">Особенности конструкции</option>
+                    <option value="paintingFeatures">Особенности окраски</option>
+                    <option value="ownerData">Данные о владельце</option>
+                    <option value="passportData">Паспортные данные</option>
+                </select>
+                <input type="text" class="filterValue" name="filterValue" required>
+                <button type="button" onclick="removeFilter(this)">Удалить</button>
+            `;
+            
+            document.getElementById('filters').appendChild(filterDiv);
+        }
+
+        function removeFilter(button) {
+            var filterDiv = button.parentElement;
+            filterDiv.remove();
+        }
+
+        function searchVehicle() {
+            var filters = document.getElementsByClassName('filter-group');
+            var filterCriteria = [];
+
+            for (var i = 0; i < filters.length; i++) {
+                var filterType = filters[i].getElementsByClassName('filterType')[0].value;
+                var filterValue = filters[i].getElementsByClassName('filterValue')[0].value.toLowerCase();
+                filterCriteria.push({ type: filterType, value: filterValue });
+            }
+
+            // Получаем существующие данные из localStorage (если они есть)
+            var existingVehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            
+            // Фильтруем транспортные средства на основе всех выбранных фильтров
+            var filteredVehicles = existingVehicles.filter(function(vehicle) {
+                return filterCriteria.every(function(criteria) {
+                    return vehicle[criteria.type].toLowerCase().includes(criteria.value);
+                });
+            });
+
+            displayResults(filteredVehicles);
+        }
+
+        function displayResults(vehicles) {
+            var resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "";
+
+            if (vehicles.length > 0) {
+                vehicles.forEach(function(vehicle) {
+                    var vehicleDiv = document.createElement("div");
+                    vehicleDiv.className = "vehicle";
+
+                    vehicleDiv.innerHTML = `
+                        <p><strong>Тип:</strong> ${vehicle.type}</p>
+                        <p><strong>Марка:</strong> ${vehicle.brand}</p>
+                        <p><strong>Производитель:</strong> ${vehicle.manufacturer}</p>
+                        <p><strong>Цвет:</strong> ${vehicle.color}</p>
+                        <p><strong>Заводской номер:</strong> ${vehicle.serialNumber}</p>
+                        <p><strong>Бортовой номер:</strong> ${vehicle.registrationNumber}</p>
+                        <p><strong>Дата выпуска:</strong> ${vehicle.manufactureDate}</p>
+                        <p><strong>Особенности конструкции:</strong> ${vehicle.constructionFeatures}</p>
+                        <p><strong>Особенности окраски:</strong> ${vehicle.paintingFeatures}</p>
+                        <p><strong>Данные о владельце:</strong> ${vehicle.ownerData}</p>
+                        <p><strong>Паспортные данные:</strong> ${vehicle.passportData}</p>
+                    `;
+
+                    resultsDiv.appendChild(vehicleDiv);
+                });
+            } else {
+                resultsDiv.innerHTML = "<p>Нет результатов, соответствующих вашему запросу.</p>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Поиск транспортных средств</h1>
+    </header>
+    
+    <main>
+        <div class="search-vehicle-form">
+            <h2>Поиск транспортного средства</h2>
+            <div id="filters">
+                <div class="filter-group">
+                    <select class="filterType" name="filterType">
+                        <option value="type">Тип</option>
+                        <option value="brand">Марка</option>
+                        <option value="manufacturer">Производитель</option>
+                        <option value="color">Цвет</option>
+                        <option value="serialNumber">Заводской номер</option>
+                        <option value="registrationNumber">Бортовой номер</option>
+                        <option value="manufactureDate">Дата выпуска</option>
+                        <option value="constructionFeatures">Особенности конструкции</option>
+                        <option value="paintingFeatures">Особенности окраски</option>
+                        <option value="ownerData">Данные о владельце</option>
+                        <option value="passportData">Паспортные данные</option>
+                    </select>
+                    <input type="text" class="filterValue" name="filterValue" required>
+                    <button type="button" onclick="removeFilter(this)">Удалить</button>
+                </div>
+            </div>
+            <button type="button" onclick="addFilter()">Добавить фильтр</button>
+            <button type="button" onclick="searchVehicle()">Поиск</button>
+        </div>
+
+        <div id="results" class="results">
+            <!-- Результаты поиска будут отображаться здесь -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Система учета состояния водных транспортных средств</p>
+    </footer>
+</body>
+</html>

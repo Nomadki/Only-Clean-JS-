@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаление транспортного средства</title>
+    <link rel="stylesheet" href="RGR.css">
+    <script>
+        function deleteVehicle() {
+            var serialNumber = document.getElementById("serialNumber").value;
+
+            // Получаем существующие данные из localStorage (если они есть)
+            var existingVehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+
+            // Ищем транспортное средство с введенным заводским номером
+            var index = existingVehicles.findIndex(function(vehicle) {
+                return vehicle.serialNumber === serialNumber;
+            });
+
+            if (index !== -1) {
+                // Если найдено совпадение, удаляем транспортное средство из списка
+                existingVehicles.splice(index, 1);
+                localStorage.setItem('vehicles', JSON.stringify(existingVehicles));
+                alert("Транспортное средство успешно удалено.");
+            } else {
+                alert("Транспортное средство с указанным заводским номером не найдено.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Удаление транспортного средства</h1>
+    </header>
+    
+    <main>
+        <div class="delete-vehicle-form">
+            <h2>Удалить транспортное средство</h2>
+            <form>
+                <label for="serialNumber">Заводской номер:</label>
+                <input type="text" id="serialNumber" name="serialNumber" required>
+                
+                <button type="button" onclick="deleteVehicle()">Удалить</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Система учета состояния водных транспортных средств</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Геопозиционирование транспортных средств</title>
+    <link rel="stylesheet" href="RGR.css">
+    <script>
+        function generateRandomCoordinates() {
+            const vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            const resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "";
+
+            if (vehicles.length > 0) {
+                vehicles.forEach(function(vehicle) {
+                    const latitude = (Math.random() * 180 - 90).toFixed(6);
+                    const longitude = (Math.random() * 360 - 180).toFixed(6);
+                    
+                    const vehicleDiv = document.createElement("div");
+                    vehicleDiv.className = "vehicle";
+
+                    vehicleDiv.innerHTML = `
+                        <p><strong>Название корабля:</strong> ${vehicle.type}</p>
+                        <p><strong>Координаты:</strong> Широта: ${latitude}, Долгота: ${longitude}</p>
+                    `;
+
+                    resultsDiv.appendChild(vehicleDiv);
+                });
+            } else {
+                resultsDiv.innerHTML = "<p>Нет доступных транспортных средств.</p>";
+            }
+        }
+
+        window.onload = generateRandomCoordinates;
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Геопозиционирование транспортных средств</h1>
+    </header>
+
+    <main>
+        <div id="results" class="results">
+            <!-- Координаты транспортных средств будут отображаться здесь -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Система учета состояния водных транспортных средств</p>
+    </footer>
+</body>
+</html>

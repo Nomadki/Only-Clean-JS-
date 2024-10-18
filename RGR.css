@@ -1,0 +1,419 @@
+
+/* Стили для всего сайта */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f5ff; /* светло-голубой цвет фона */
+}
+
+header {
+    background-color: #0366d6; /* синий цвет фона для заголовка */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+nav {
+    background-color: #1c8bf9; /* голубой цвет фона для навигации */
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #0366d6; /* синий цвет фона для подвала */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Стили для формы авторизации */
+.login-container {
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    text-align: center;
+    color: #0366d6; /* синий цвет заголовка */
+}
+
+.login-container form {
+    margin-top: 20px;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* цвет текста меток */
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0366d6; /* синий цвет фона кнопки */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #0552a5; /* изменение цвета фона при наведении */
+}
+
+.add-vehicle-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-vehicle-form h2 {
+    text-align: center;
+    color: #0366d6; /* синий цвет заголовка */
+}
+
+.add-vehicle-form form {
+    margin-top: 20px;
+}
+
+.add-vehicle-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* цвет текста меток */
+}
+
+.add-vehicle-form input[type="text"],
+.add-vehicle-form input[type="date"],
+.add-vehicle-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-vehicle-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0366d6; /* синий цвет фона кнопки */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-vehicle-form button:hover {
+    background-color: #0552a5; /* изменение цвета фона при наведении */
+}
+
+.edit-vehicle-form {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.edit-vehicle-form h2 {
+    color: #4682b4;
+    text-align: center;
+}
+
+.edit-vehicle-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-vehicle-form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.edit-vehicle-form input[type="text"],
+.edit-vehicle-form input[type="date"],
+.edit-vehicle-form textarea {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.edit-vehicle-form button {
+    background-color: #4682b4;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.edit-vehicle-form button:hover {
+    background-color: #315f86;
+}
+
+.search-vehicle-form, .edit-vehicle-form {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.search-vehicle-form h2, .edit-vehicle-form h2 {
+    color: #4682b4;
+    text-align: center;
+}
+
+.search-vehicle-form form, .edit-vehicle-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-vehicle-form label, .edit-vehicle-form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.search-vehicle-form input[type="text"], .edit-vehicle-form input[type="text"],
+.search-vehicle-form input[type="date"], .edit-vehicle-form input[type="date"],
+.search-vehicle-form textarea, .edit-vehicle-form textarea,
+.search-vehicle-form select {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.search-vehicle-form button, .edit-vehicle-form button {
+    background-color: #4682b4;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.search-vehicle-form button:hover, .edit-vehicle-form button:hover {
+    background-color: #315f86;
+}
+
+.results {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.vehicle {
+    background-color: #e0f7fa;
+    border: 1px solid #b2ebf2;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.vehicle p {
+    margin: 5px 0;
+}
+
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.filter-group select, .filter-group input[type="text"] {
+    margin-right: 10px;
+    flex: 1;
+}
+
+.filter-group button {
+    background-color: #ff6347;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-group button:hover {
+    background-color: #cc5142;
+}
+
+.vehicle {
+    background-color: #e0f7fa;
+    border: 1px solid #b2ebf2;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.vehicle p {
+    margin: 5px 0;
+}
+
+.maintenance-form {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.maintenance-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.maintenance-form input[type="date"] {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.maintenance-form button {
+    background-color: #4682b4;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.maintenance-form button:hover {
+    background-color: #315f86;
+}
+
+.results {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.notification {
+    background-color: #ffeb3b;
+    border: 1px solid #fdd835;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.notification p {
+    margin: 5px 0;
+}
+
+.maintenance-form {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.maintenance-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.maintenance-form input[type="date"] {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.maintenance-form button {
+    background-color: #4682b4;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.maintenance-form button:hover {
+    background-color: #315f86;
+}
+
+.results {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.history {
+    background-color: #e0f7fa;
+    border: 1px solid #b2ebf2;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.history p {
+    margin: 5px 0;
+}

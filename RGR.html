@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учет состояния водных транспортных средств</title>
+    <link rel="stylesheet" href="RGR.css">
+</head>
+<body>
+    <header>
+        <h1>Система учета состояния водных транспортных средств</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="Add.html">Добавить транспорт</a></li>
+            <li><a href="Search.html">Поиск по фильтрам</a></li>
+            <li><a href="Edit.html">Редактирование</a></li>
+            <li><a href="Report.html">Уведомления</a></li>
+            <li><a href="Notification.html">Отчёты</a></li>
+            <li><a href="Location.html">Геопозиционирование</a></li>
+            <li><a href="Delete.html">Удаление</a></li>
+        </ul>
+    </nav>
+
+    <main>
+          <div id="vehiclesContainer">
+            <!-- Здесь будут отображены добавленные транспортные средства -->
+        </div>
+    </main>
+
+     <script>
+        function displayVehicles() {
+            var vehiclesContainer = document.getElementById('vehiclesContainer');
+            vehiclesContainer.innerHTML = ''; // Очищаем контейнер перед добавлением
+
+            // Получаем существующие данные из localStorage (если они есть)
+            var existingVehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+
+            if (existingVehicles.length === 0) {
+                vehiclesContainer.innerHTML = '<p>Нет добавленных транспортных средств.</p>';
+            } else {
+                var table = document.createElement('table');
+                var headerRow = document.createElement('tr');
+                headerRow.innerHTML = '<th>Тип</th><th>Марка</th><th>Производитель</th><th>Цвет</th><th>Заводской номер</th><th>Бортовой номер</th><th>Дата выпуска</th><th>Особенности конструкции</th><th>Особенности окраски</th><th>Данные о владельце</th><th>Паспортные данные</th>';
+                table.appendChild(headerRow);
+
+                existingVehicles.forEach(function(vehicle) {
+                    var row = document.createElement('tr');
+                    row.innerHTML = `<td>${vehicle.type}</td><td>${vehicle.brand}</td><td>${vehicle.manufacturer}</td><td>${vehicle.color}</td><td>${vehicle.serialNumber}</td><td>${vehicle.registrationNumber}</td><td>${vehicle.manufactureDate}</td><td>${vehicle.constructionFeatures}</td><td>${vehicle.paintingFeatures}</td><td>${vehicle.ownerData}</td><td>${vehicle.passportData}</td>`;
+                    table.appendChild(row);
+                });
+
+                vehiclesContainer.appendChild(table);
+            }
+        }
+
+        // При загрузке страницы отобразим уже сохраненные транспортные средства
+        window.onload = displayVehicles;
+    </script>
+    <footer>
+        <p>&copy; 2024 Система учета состояния водных транспортных средств</p>
+    </footer>
+</body>
+</html>

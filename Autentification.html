@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="RGR.css">
+    <script>
+        function checkLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Проверка логина и пароля
+            if ((username === "admin" && password === "admin1") || (username === "owner" && password === "owner1")) {
+                // Если введенные данные правильные, перенаправляем на страницу успешной авторизации
+                window.location.href = "RGR.html";
+            } else {
+                // Если введенные данные неправильные, выдаем сообщение об ошибке и запрашиваем кодовое слово
+                alert("Неправильное имя пользователя или пароль.");
+
+                var secretWord = prompt("Введите кодовое слово:");
+
+                // Проверка кодового слова
+                if (secretWord === "secret") {
+                    alert("Кодовое слово принято. Доступ разрешен.");
+                    window.location.href = "RGR.html";
+                } else {
+                    alert("Неправильное кодовое слово. Доступ запрещен.");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <main>
+        <div class="login-container">
+            <h2>Авторизация</h2>
+            <form>
+                <label for="username">Имя пользователя:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="button" onclick="checkLogin()">Войти</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

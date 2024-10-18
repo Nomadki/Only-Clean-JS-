@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учет состояния водных транспортных средств</title>
+    <link rel="stylesheet" href="RGR.css">
+    <script>
+        function saveVehicle() {
+            var type = document.getElementById("type").value;
+            var brand = document.getElementById("brand").value;
+            var manufacturer = document.getElementById("manufacturer").value;
+            var color = document.getElementById("color").value;
+            var serialNumber = document.getElementById("serialNumber").value;
+            var registrationNumber = document.getElementById("registrationNumber").value;
+            var manufactureDate = document.getElementById("manufactureDate").value;
+            var constructionFeatures = document.getElementById("constructionFeatures").value;
+            var paintingFeatures = document.getElementById("paintingFeatures").value;
+            var ownerData = document.getElementById("ownerData").value;
+            var passportData = document.getElementById("passportData").value;
+
+            // Проверка на пустые поля
+            if (type === "" || brand === "" || manufacturer === "" || color === "" || serialNumber === "" || 
+                registrationNumber === "" || manufactureDate === "" || constructionFeatures === "" || 
+                paintingFeatures === "" || ownerData === "" || passportData === "") {
+                alert("Пожалуйста, заполните все поля формы.");
+            } else {
+                var vehicle = {
+                    type: type,
+                    brand: brand,
+                    manufacturer: manufacturer,
+                    color: color,
+                    serialNumber: serialNumber,
+                    registrationNumber: registrationNumber,
+                    manufactureDate: manufactureDate,
+                    constructionFeatures: constructionFeatures,
+                    paintingFeatures: paintingFeatures,
+                    ownerData: ownerData,
+                    passportData: passportData
+                };
+
+                // Получаем существующие данные из localStorage (если они есть)
+                var existingVehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+
+                // Добавляем новое транспортное средство в массив
+                existingVehicles.push(vehicle);
+
+                // Сохраняем обновленные данные в localStorage
+                localStorage.setItem('vehicles', JSON.stringify(existingVehicles));
+                
+                alert("Транспортное средство успешно сохранено!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Система учета состояния водных транспортных средств</h1>
+    </header>
+    
+    <main>
+        <div class="add-vehicle-form">
+            <h2>Добавить транспортное средство</h2>
+            <form>
+                <label for="type">Тип:</label>
+                <input type="text" id="type" name="type" required>
+                
+                <label for="brand">Марка:</label>
+                <input type="text" id="brand" name="brand" required>
+                
+                <label for="manufacturer">Производитель:</label>
+                <input type="text" id="manufacturer" name="manufacturer" required>
+                
+                <label for="color">Цвет:</label>
+                <input type="text" id="color" name="color" required>
+                
+                <label for="serialNumber">Заводской номер:</label>
+                <input type="text" id="serialNumber" name="serialNumber" required>
+                
+                <label for="registrationNumber">Бортовой номер:</label>
+                <input type="text" id="registrationNumber" name="registrationNumber" required>
+                
+                <label for="manufactureDate">Дата выпуска:</label>
+                <input type="date" id="manufactureDate" name="manufactureDate" required>
+                
+                <label for="constructionFeatures">Особенности конструкции:</label>
+                <textarea id="constructionFeatures" name="constructionFeatures" required></textarea>
+                
+                <label for="paintingFeatures">Особенности окраски:</label>
+                <textarea id="paintingFeatures" name="paintingFeatures" required></textarea>
+                
+                <label for="ownerData">Данные о владельце:</label>
+                <textarea id="ownerData" name="ownerData" required></textarea>
+                
+                <label for="passportData">Паспортные данные:</label>
+                <input type="text" id="passportData" name="passportData" required>
+                
+                <button type="button" onclick="saveVehicle()">Сохранить</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Система учета состояния водных транспортных средств</p>
+    </footer>
+</body>
+</html>

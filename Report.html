@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уведомления о техническом осмотре</title>
+    <link rel="stylesheet" href="RGR.css">
+    <script>
+        function checkMaintenance() {
+            var inputDate = new Date(document.getElementById("currentDate").value);
+            var resultsDiv = document.getElementById("results");
+            resultsDiv.innerHTML = "";
+
+            if (isNaN(inputDate.getTime())) {
+                resultsDiv.innerHTML = "<p>Пожалуйста, введите корректную дату.</p>";
+                return;
+            }
+
+            var vehicles = JSON.parse(localStorage.getItem('vehicles')) || [];
+            var notifications = [];
+
+            vehicles.forEach(function(vehicle) {
+                var manufactureDate = new Date(vehicle.manufactureDate);
+                var nextMaintenanceDate = new Date(manufactureDate);
+                nextMaintenanceDate.setFullYear(manufactureDate.getFullYear() + 1);
+
+                while (nextMaintenanceDate < inputDate) {
+                    nextMaintenanceDate.setFullYear(nextMaintenanceDate.getFullYear() + 1);
+                }
+
+                var timeDiff = nextMaintenanceDate - inputDate;
+                var daysToMaintenance = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                if (daysToMaintenance <= 30) {
+                    notifications.push({
+                        type: vehicle.type,
+                        daysToMaintenance: daysToMaintenance
+                    });
+                }
+            });
+
+            if (notifications.length > 0) {
+                notifications.forEach(function(notification) {
+                    var notificationDiv = document.createElement("div");
+                    notificationDiv.className = "notification";
+
+                    notificationDiv.innerHTML = `
+                        <p><strong>Название корабля:</strong> ${notification.type}</p>
+                        <p><strong>Дней до следующего ТО:</strong> ${notification.daysToMaintenance}</p>
+                    `;
+
+                    resultsDiv.appendChild(notificationDiv);
+                });
+            } else {
+                resultsDiv.innerHTML = "<p>Нет уведомлений о предстоящем техническом осмотре.</p>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Уведомления о техническом осмотре</h1>
+    </header>
+
+    <main>
+        <div class="maintenance-form">
+            <h2>Проверка уведомлений о ТО</h2>
+            <label for="currentDate">Введите текущую дату:</label>
+            <input type="date" id="currentDate" required>
+            <button type="button" onclick="checkMaintenance()">Проверить</button>
+        </div>
+
+        <div id="results" class="results">
+            <!-- Уведомления о ТО будут отображаться здесь -->
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Система учета состояния водных транспортных средств</p>
+    </footer>
+</body>
+</html>
